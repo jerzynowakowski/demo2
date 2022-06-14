@@ -247,6 +247,52 @@ else {
         </ResultCollector>
         <hashTree/>
       </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Part 3 ssh https://github.com/yciabaud/jmeter-ssh-sampler/releases" enabled="true">
+        <stringProp name="TestPlan.comments">https://github.com/yciabaud/jmeter-ssh-sampler/releases</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments"/>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${__P(host,)}</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(host,)}</stringProp>
+          <stringProp name="HTTPSampler.protocol"></stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path"></stringProp>
+          <stringProp name="TestPlan.comments">dev.properties file-&gt;  host=10.200.1.1 port=80 -&gt; jmeter -q dev.properties -t test.jmx </stringProp>
+          <stringProp name="HTTPSampler.concurrentPool">6</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+        </ConfigTestElement>
+        <hashTree/>
+        <org.apache.jmeter.protocol.ssh.sampler.SSHCommandSampler guiclass="TestBeanGUI" testclass="org.apache.jmeter.protocol.ssh.sampler.SSHCommandSampler" testname="SSH linux_host" enabled="true">
+          <stringProp name="command">scp /Users/jerzy.nowakowski/Clean_env.sh ubuntu@${__P(host,)} &amp;&amp; mkdir required_scripts &amp;&amp; mv Clean_env.sh required_scripts/ &amp;&amp; cd required_scripts &amp;&amp; chmod +x Clean_env.sh &amp;&amp; ./Clean_env</stringProp>
+          <intProp name="connectionTimeout">5000</intProp>
+          <stringProp name="hostname">${__P(host,)}</stringProp>
+          <stringProp name="passphrase"></stringProp>
+          <stringProp name="password">cocojumbo</stringProp>
+          <intProp name="port">22</intProp>
+          <boolProp name="printStdErr">true</boolProp>
+          <stringProp name="sshkeyfile">/Users/jerzy.nowakowski/.ssh/id_rsa.pub</stringProp>
+          <boolProp name="useReturnCode">true</boolProp>
+          <boolProp name="useTty">false</boolProp>
+          <stringProp name="username">ubuntu</stringProp>
+          <stringProp name="TestPlan.comments">linux_host is taken from properties file e.g. dev.properties</stringProp>
+        </org.apache.jmeter.protocol.ssh.sampler.SSHCommandSampler>
+        <hashTree/>
+      </hashTree>
     </hashTree>
   </hashTree>
 </jmeterTestPlan>
